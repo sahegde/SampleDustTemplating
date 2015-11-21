@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>sample</title>
+	<script src="./dust.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+	<script id="entry-template">
+		{title}
+
+		<ul>
+		    {#names}
+		    <li>{name}</li>{~n}
+		    {/names}
+		</ul>
+	</script>
+
+	<div id="output"></div>
+	
+	<script>
+	    var data = {
+	        "title": "Famous People", 
+	        "names" : [{ "name": "Larry" },{ "name": "Curly" },{ "name": "Moe" }]
+	    };
+	    
+	    var source   = $("#entry-template").html();
+	    var compiled = dust.compile(source, "intro");
+	    dust.loadSource(compiled);
+	    
+	    dust.render("intro", data, function(err, out) {
+	        $("#output").html(out);
+	    });
+	</script>
+</body>
+</html>
